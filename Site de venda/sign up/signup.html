@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="signup_css.css">
+    <title>Sign Up Form</title>
+</head>
+<body>
+    <main>
+        <h1>Create Account</h1>
+        <div class="social-media">
+            <a href="">
+                <img src="facebook.png" alt="facebook PNG">
+            </a>
+
+            <a href="">
+                <img src="google.png" alt="google PNG">
+            </a>
+
+            <a href="">
+                <img src="linkedin.png" alt="linkedin PNG">
+            </a>
+
+        </div>
+        <div class="alternative">
+            <span>OR</span>
+        </div>
+        <form>
+            <label for="name">
+                <span>Name</span>
+                <input type="text" id="name" name="name">
+            </label>
+            
+            <label for="email">
+                <span>E-mail</span>
+                <input type="email" id="email" name="email">
+            </label>
+
+            <label for="password">
+                <span>Password</span>
+                <input type="password" id="password" name="password">
+            </label>
+
+            <input type="button" id="submit" value="Sign Up">
+        </form>
+    </main>
+    <section class="images">
+        <img src="mobile.svg" alt="decoration">
+        <div class="circle"></div>
+    </section>
+
+<script>
+
+    document.getElementById("submit").addEventListener("click", function() {
+        const url = '/sign-up'
+
+        arrayKey = ["type", "name", "email", "password"]
+        arrayValue = ["formRegister", document.getElementById("name").value, document.getElementById("email").value, document.getElementById("password").value]
+
+        if (!(arrayValue[1] == "" || arrayValue[2] == "" || arrayValue[3] == "")) {
+            console.log("sending for back end")
+            const myHeaders = new Headers();
+
+            for (let i=0; i<arrayKey.length; i++) {
+                myHeaders.append(arrayKey[i], arrayValue[i]);}
+                
+            const myInit = {
+                method: "POST",
+                headers: myHeaders}
+
+            let responsePage
+            fetch(url, myInit).then(function (response) {
+                if (!(response.status == 200)) {throw new Error("Error: in the api")}
+            })
+            
+            alert(`You're successfully logged`)
+
+        } else {
+            // negativeSendingValue()
+            console.log('not sending for back end')
+
+        }
+    })
+
+</script>
+</body>
+</html>
